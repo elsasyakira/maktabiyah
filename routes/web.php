@@ -25,8 +25,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
+//user
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+Route::post('/user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
+Route::delete('/user/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
 
 // Umat
 Route::resource('umats', UmatController::class);
