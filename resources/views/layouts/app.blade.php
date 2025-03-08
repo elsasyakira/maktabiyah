@@ -78,3 +78,18 @@
     </div>
 </body>
 </html>
+
+<!-- jQuery HARUS di-load dulu -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Setelah itu, baru script lain -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Script Custom -->
+<script>
+    $(document).ready(function() {
+        console.log("jQuery sudah siap!");
+        $("#myTable").DataTable();
+    });
+</script>

@@ -55,6 +55,14 @@
 
         <!-- Apps -->
         <li class="menu-item">
+            <a href="{{ route('umats.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ri-user-line"></i>
+                <div data-i18n="User">Data Umat</div>
+            </a>
+        </li>
+
+        <!-- Apps -->
+        <li class="menu-item">
             <a href="{{ route('user') }}" class="menu-link">
                 <i class="menu-icon tf-icons ri-user-line"></i>
                 <div data-i18n="User">Users</div>

@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UmatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +27,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'dashboard'])->name
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+
+// Umat
+Route::resource('umats', UmatController::class);
