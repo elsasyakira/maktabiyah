@@ -22,14 +22,20 @@ use App\Http\Controllers\UmatController;
 Auth::routes();
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
-//user
-Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
-Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
-Route::post('/user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
-Route::delete('/user/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
+Route::middleware(['admin'])->group(function () {
+    //user
+    Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
+    Route::post('/user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
+    Route::delete('/user/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
+    Route::put('/users/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+    // Umat
+    Route::resource('umats', UmatController::class);
+});
 
-// Umat
-Route::resource('umats', UmatController::class);
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+});

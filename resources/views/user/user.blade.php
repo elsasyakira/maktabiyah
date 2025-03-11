@@ -50,8 +50,10 @@
                                                     <i class="ri-more-2-line"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href=""><i
-                                                            class="ri-pencil-line me-1"></i> Edit</a>
+                                                    <a class="dropdown-item" href="{{ route('user.edit', $user->id) }}">
+                                                        <i class="ri-pencil-line me-1"></i> Edit
+                                                    </a>
+
                                                     <form action="{{ route('user.destroy', $user->id) }}" method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus {{ $user->name }}?');">
                                                         @csrf

@@ -61,7 +61,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('user.edit', compact('user')); // Pastikan view edit.blade.php ada
+        return view('user.edit', compact('user'));
     }
 
     // Memperbarui data user
@@ -71,17 +71,21 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|min:6',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'role' => 'required|in:admin,jamiah,syubah,mudir',
+            'syubah' => 'required|in:AshShidiqqin,AsySyuhada,AshSholihin,AlMutaqien,AlMuhsinin,AshShobirin',
         ]);
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'role' => $request->role,
+            'syubah' => $request->syubah,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
+        return redirect()->route('user')->with('success', 'User berhasil diperbarui.');
     }
 
     // Menghapus user dari database

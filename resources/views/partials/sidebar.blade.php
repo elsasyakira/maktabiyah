@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
+        <a href="{{ route('dashboard') }}" class="app-brand-link">
             <span class="app-brand-logo demo me-1">
                 <span style="color: var(--bs-primary)">
                     <svg width="30" height="24" viewBox="0 0 250 196" fill="none"
@@ -53,21 +53,42 @@
             </a>
         </li>
 
-        <!-- Apps -->
-        <li class="menu-item">
-            <a href="{{ route('umats.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ri-user-line"></i>
-                <div data-i18n="User">Data Umat</div>
-            </a>
-        </li>
-
-        <!-- Apps -->
-        <li class="menu-item">
-            <a href="{{ route('user') }}" class="menu-link">
-                <i class="menu-icon tf-icons ri-user-line"></i>
-                <div data-i18n="User">Users</div>
-            </a>
-        </li>
+        @if (Auth::user()->role == 'admin')
+            <li class="menu-item">
+                <a href="{{ route('umats.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ri-user-line"></i>
+                    <div data-i18n="User">Data Umat</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('user') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ri-user-line"></i>
+                    <div data-i18n="User">Users</div>
+                </a>
+            </li>
+        @endif
+        @if (Auth::user()->role == 'mudir')
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="menu-icon tf-icons ri-user-line"></i>
+                    <div data-i18n="User">Buat Abensi</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="menu-icon tf-icons ri-user-line"></i>
+                    <div data-i18n="User">Abensi Saya</div>
+                </a>
+            </li>
+        @endif
+        @if (Auth::user()->role == 'syubah' || Auth::user()->role == 'jamiah')
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="menu-icon tf-icons ri-user-line"></i>
+                    <div data-i18n="User">Laporan Abensi</div>
+                </a>
+            </li>
+        @endif
 
 
         <!-- Components -->
