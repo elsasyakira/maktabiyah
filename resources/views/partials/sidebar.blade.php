@@ -53,15 +53,23 @@
             </a>
         </li>
 
-        <!-- Apps -->
+        <!-- Umat -->
         <li class="menu-item">
             <a href="{{ route('umats.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ri-user-line"></i>
+                <i class="menu-icon tf-icons ri-group-line"></i>
                 <div data-i18n="User">Data Umat</div>
             </a>
         </li>
 
-        <!-- Apps -->
+        <!-- Absensi -->
+        <li class="menu-item">
+            <a href="{{ route('absensis.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ri-clipboard-line"></i>
+                <div data-i18n="User">Absensi Tausiyah</div>
+            </a>
+        </li>
+
+        <!-- User -->
         <li class="menu-item">
             <a href="{{ route('user') }}" class="menu-link">
                 <i class="menu-icon tf-icons ri-user-line"></i>

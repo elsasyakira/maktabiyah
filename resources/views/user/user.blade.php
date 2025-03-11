@@ -9,6 +9,11 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userModal" onclick="resetModal()">
                             <i class="ri-user-add-line me-1"></i> Tambah User</button>
                     </div>
+                    @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                     <div class="table-responsive">
                         <table class="table table-sm">
                             <thead>
@@ -44,10 +49,10 @@
                                                     <a class="dropdown-item" href="#" onclick="editUser({{ $user }})" data-bs-toggle="modal" data-bs-target="#userModal">
                                                         <i class="ri-pencil-line me-1"></i> Edit
                                                     </a>
-                                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus {{ $user->name }}?');">
+                                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="dropdown-item text-danger">
+                                                        <button type="submit" class="dropdown-item text-danger buttonDeletion">
                                                             <i class="ri-delete-bin-6-line me-1"></i> Delete
                                                         </button>
                                                     </form>
@@ -113,7 +118,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

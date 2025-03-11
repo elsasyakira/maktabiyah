@@ -54,7 +54,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success">Update</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         <a href="{{ route('umats.index') }}" class="btn btn-secondary">Batal</a>
                     </form>
                 </div>
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             $('form').on('submit', function(e) {
                 e.preventDefault();
@@ -82,5 +82,5 @@
                 });
             });
         });
-    </script> --}}
+    </script>
 @endsection

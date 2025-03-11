@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UmatController;
+use App\Http\Controllers\AbsensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,5 @@ Route::put('/user/{id}', [App\Http\Controllers\UserController::class, 'update'])
 
 // Umat
 Route::resource('umats', UmatController::class);
+
+Route::resource('absensis', AbsensiController::class);

@@ -43,6 +43,10 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('mat/assets/js/config.js') }}"></script>
+
+    {{-- alert message --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -107,6 +111,43 @@
 
     <!-- Place this tag before closing body tag for github widget button. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- Tambahkan di file layout utama -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            console.log("SweetAlert2 siap!");
+    
+            $(document).on('click', '.buttonDeletion', function(e) {
+                e.preventDefault();
+                console.log("Tombol hapus diklik!");
+    
+                let form = $(this).closest('form');
+                console.log("Form target:", form);
+    
+                Swal.fire({
+                    title: 'Konfirmasi Penghapusan',
+                    text: 'Apakah Anda yakin ingin menghapus data ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        console.log("Pengguna mengonfirmasi penghapusan.");
+                        form.submit();
+                    } else {
+                        console.log("Penghapusan dibatalkan.");
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 
 </html>
