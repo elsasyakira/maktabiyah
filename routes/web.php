@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UmatController;
+use App\Http\Controllers\AbsensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Auth::routes();
 
 
 
+
 Route::middleware(['admin'])->group(function () {
     //user
     Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
@@ -30,6 +32,8 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/user/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
     Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
     Route::put('/users/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+    Route::put('/user/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+    Route::patch('/user/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
     // Umat
     Route::resource('umats', UmatController::class);
 });
@@ -38,4 +42,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
     Route::get('/', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+    Route::resource('absensis', AbsensiController::class);
 });

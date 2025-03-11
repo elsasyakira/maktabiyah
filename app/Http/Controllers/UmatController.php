@@ -22,10 +22,10 @@ class UmatController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'nas' => 'required|integer',
+            'nas' => 'required|string|max:10',
             'syubah' => 'required|string',
             'farah' => 'required|integer',
-            'holaqoh' => 'required|integer',
+            'holaqoh' => 'required|string|max:10',
         ]);
 
         Umat::create([
@@ -49,10 +49,10 @@ class UmatController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'nas' => 'required|integer',
+            'nas' => 'required|string|max:10',
             'syubah' => 'required|string',
             'farah' => 'required|integer',
-            'holaqoh' => 'required|integer',
+            'holaqoh' => 'required|string|max:10',
         ]);
 
         $umat = Umat::findOrFail($id);

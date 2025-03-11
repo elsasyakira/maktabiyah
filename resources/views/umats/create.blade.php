@@ -14,7 +14,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="nas" class="form-label">Nas</label>
-                                <input type="number" class="form-control" id="nas" name="nas" required>
+                                <input type="text" class="form-control" id="nas" name="nas" required>
                             </div>
                         </div>
                     
@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="holaqoh" class="form-label">Holaqoh</label>
-                                <input type="number" class="form-control" id="holaqoh" name="holaqoh" required>
+                                <input type="text" class="form-control" id="holaqoh" name="holaqoh" required>
                             </div>
                         </div>
                     

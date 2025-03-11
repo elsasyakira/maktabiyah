@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="nas" class="form-label">Nas</label>
-                                <input type="number" class="form-control" id="nas" name="nas"
+                                <input type="text" class="form-control" id="nas" name="nas"
                                     value="{{ $umat->nas }}" required>
                             </div>
                         </div>
@@ -49,12 +49,12 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="holaqoh" class="form-label">Holaqoh</label>
-                                <input type="number" class="form-control" id="holaqoh" name="holaqoh"
+                                <input type="text" class="form-control" id="holaqoh" name="holaqoh"
                                     value="{{ $umat->holaqoh }}" required>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-success">Update</button>
                         <a href="{{ route('umats.index') }}" class="btn btn-secondary">Batal</a>
                     </form>
                 </div>
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('form').on('submit', function(e) {
                 e.preventDefault();
@@ -82,5 +82,5 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 @endsection

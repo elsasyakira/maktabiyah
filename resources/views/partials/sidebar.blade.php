@@ -53,6 +53,7 @@
             </a>
         </li>
 
+
         @if (Auth::user()->role == 'admin')
             <li class="menu-item">
                 <a href="{{ route('umats.index') }}" class="menu-link">
@@ -69,15 +70,9 @@
         @endif
         @if (Auth::user()->role == 'mudir')
             <li class="menu-item">
-                <a href="#" class="menu-link">
-                    <i class="menu-icon tf-icons ri-user-line"></i>
-                    <div data-i18n="User">Buat Abensi</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="#" class="menu-link">
-                    <i class="menu-icon tf-icons ri-user-line"></i>
-                    <div data-i18n="User">Abensi Saya</div>
+                <a href="{{ route('absensis.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ri-clipboard-line"></i>
+                    <div data-i18n="User">Absensi Tausiyah</div>
                 </a>
             </li>
         @endif
@@ -88,6 +83,7 @@
                     <div data-i18n="User">Laporan Abensi</div>
                 </a>
             </li>
+            <!-- Absensi -->
         @endif
 
 
