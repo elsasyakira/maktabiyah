@@ -52,36 +52,37 @@ class UserController extends Controller
         return redirect()->route('user')->with('success', 'User berhasil ditambahkan.');
     }
 
-
-
-
-
-
     // Menampilkan form edit user
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('user.edit', compact('user')); // Pastikan view edit.blade.php ada
+        return response()->json($user); // Mengembalikan data dalam format JSON
     }
 
     // Memperbarui data user
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|min:6',
+            'email' => 'required|email|max:255|unique:users,email,'.$id,
+            'syubah' => 'required|string',
+            'role' => 'required|string',
+            'password' => 'nullable|min:6', // Password bisa kosong
         ]);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password ? Hash::make($request->password) : $user->password,
-        ]);
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->syubah = $request->syubah;
+        $user->role = $request->role;
 
-        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password); // Hash password jika diisi
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'User berhasil diperbarui');
     }
 
     // Menghapus user dari database

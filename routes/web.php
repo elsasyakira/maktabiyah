@@ -30,6 +30,9 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
 Route::post('/user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
 Route::delete('/user/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
+Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+
 
 // Umat
 Route::resource('umats', UmatController::class);

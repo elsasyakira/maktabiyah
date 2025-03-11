@@ -2,17 +2,20 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row gy-3">
-            <h4>Data Umat</h4>
-            <a href="{{ route('umats.create') }}" class="btn btn-primary col-md-2">Tambah Data</a>
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+            <label class="fw-bold">List Data Umat</label>
 
             <!-- Data Tables -->
             <div class="col-12">
                 <div class="card overflow-hidden">
+                    <div class="card-body">
+                        <a href="{{ route('umats.create') }}" class="btn btn-primary col-md-2"><i
+                                class="ri-user-add-line me-1"></i>Tambah Data</a>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                    </div>
                     <div class="table-responsive ">
                         <table class="table table-sm">
                             <thead>
