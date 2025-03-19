@@ -46,7 +46,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item">
+        <li class="menu-item {{ $menuDashboard ?? '' }}">
             <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
@@ -74,9 +74,16 @@
                 </a>
             </li>
             <li class="menu-item">
+            <li class="menu-item {{ $menuAdminUser ?? '' }}">
                 <a href="{{ route('user') }}" class="menu-link">
                     <i class="menu-icon tf-icons ri-user-line"></i>
                     <div data-i18n="User">Users</div>
+                </a>
+            </li>
+            <li class="menu-item {{ $menuAdminUmat ?? '' }}">
+                <a href="{{ route('umats.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ri-user-line"></i>
+                    <div data-i18n="User">Data Umat</div>
                 </a>
             </li>
         @endif

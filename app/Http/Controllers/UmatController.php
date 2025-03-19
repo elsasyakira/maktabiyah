@@ -9,8 +9,13 @@ class UmatController extends Controller
 {
     public function index()
     {
-        $umats = Umat::all();
-        return view('umats.index', compact('umats')); // Pastikan file view ini ada
+        $data = [
+            "umats" => Umat::all(),
+            "title" => "Data Umat",
+            "menuAdminUmat" => "active",
+        ];
+        
+        return view('umats.index', $data);
     }
 
     public function create()
