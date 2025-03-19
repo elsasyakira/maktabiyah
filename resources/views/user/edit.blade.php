@@ -8,104 +8,121 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    <div class="card mb-6">
+                    <div class="card">
                         <!-- Account -->
-                        <div class="card-body">
-                            <div class="d-flex align-items-start align-items-sm-center gap-6">
-                                <img src="{{ asset('mat/assets/img/avatars/1.png') }}" alt="user-avatar"
-                                    class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
-                                <div class="button-wrapper">
-                                    <label for="upload" class="btn btn-sm btn-primary me-3 mb-4" tabindex="0">
-                                        <span class="d-none d-sm-block">Upload new photo</span>
-                                        <i class="ri-upload-2-line d-block d-sm-none"></i>
-                                        <input type="file" id="upload" class="account-file-input" hidden
-                                            accept="image/png, image/jpeg" />
-                                    </label>
-                                    <button type="button" class="btn btn-sm btn-outline-danger account-image-reset mb-4">
-                                        <i class="ri-refresh-line d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Reset</span>
-                                    </button>
-
-                                    <div>Allowed JPG, GIF or PNG. Max size of 800K</div>
-                                </div>
-                            </div>
+                        <div class="card-header bg-warning">
+                            <a class="btn btn-primary" href="{{ route('user') }}">
+                                <i class="ri-arrow-left-line me-1"></i> Kembali
+                            </a>
                         </div>
-                        <div class="card-body pt-0">
-                            <form id="formAccountSettings" action="{{ route('users.update', $user->id) }}" method="POST">
+                        <div class="card-body">
+
+                            <form id="formAccountSettings" action="{{ route('user.update', $user->id) }}" method="POST">
                                 @csrf
-                                @method('PUT')
                                 <div class="row mt-1 g-5">
                                     <div class="col-md-6">
                                         <div class="form-floating form-floating-outline">
-                                            <input class="form-control" type="text" id="firstName" name="name"
-                                                value="{{ old('name', $user->name) }}" autofocus required />
-                                            <label for="firstName">First Name</label>
+                                            <input class="form-control @error('name') is-invalid @enderror" type="text"
+                                                id="firstName" name="name" placeholder="Masukan Nama"
+                                                value="{{ $user->name }}" />
+                                            @error('name')
+                                                <small class="text-danger">
+                                                    {{ $message }}
+                                                </small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating form-floating-outline">
-                                            <input class="form-control" type="text" name="lastName" id="lastName"
-                                                value="Doe" />
-                                            <label for="lastName">Last Name</label>
+                                            <input class="form-control @error('email') is-invalid @enderror" type="email"
+                                                name="email" id="lastName" placeholder="Masukan Email"
+                                                value="{{ $user->email }}" />
+                                            @error('email')
+                                                <small class="text-danger">
+                                                    {{ $message }}
+                                                </small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating form-floating-outline">
-                                            <input class="form-control" type="text" id="email" name="email"
-                                                value="{{ old('email', $user->email) }}"
-                                                placeholder="john.doe@example.com" />
-                                            <label for="email">E-mail</label>
+                                            <select name="syubah"
+                                                class="form-control @error('syubah') is-invalid @enderror">
+                                                <option selected disabled>-- Pilih Syubah --</option>
+                                                <option value="AshShidiqqin"
+                                                    {{ $user->syubah == 'AshShidiqqin' ? 'selected' : '' }}>AshShidiqqin
+                                                </option>
+                                                <option value="AsySyuhada"
+                                                    {{ $user->syubah == 'AsySyuhada' ? 'selected' : '' }}>AsySyuhada
+                                                </option>
+                                                <option value="AshSholihin"
+                                                    {{ $user->syubah == 'AshSholihin' ? 'selected' : '' }}>AshSholihin
+                                                </option>
+                                                <option value="AlMutaqien"
+                                                    {{ $user->syubah == 'AlMutaqien' ? 'selected' : '' }}>AlMutaqien
+                                                </option>
+                                                <option value="AlMuhsinin"
+                                                    {{ $user->syubah == 'AlMuhsinin' ? 'selected' : '' }}>AlMuhsinin
+                                                </option>
+                                                <option value="AshShobirin"
+                                                    {{ $user->syubah == 'AshShobirin' ? 'selected' : '' }}>AshShobirin
+                                                </option>
+                                            </select>
+                                            @error('syubah')
+                                                <small class="text-danger">
+                                                    {{ $message }}
+                                                </small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating form-floating-outline">
-                                            <input type="text" class="form-control" id="organization" name="syubah"
-                                                value="{{ old('syubah', $user->syubah) }}" />
-                                            <label for="organization">Syubah</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-merge">
-                                            <div class="form-floating form-floating-outline">
-                                                <input type="text" id="phoneNumber" name="phoneNumber"
-                                                    class="form-control" placeholder="202 555 0111" />
-                                                <label for="phoneNumber">Phone Number</label>
-                                            </div>
-                                            <span class="input-group-text">US (+1)</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating form-floating-outline">
-                                            <input type="text" class="form-control" id="address" name="address"
-                                                placeholder="Address" />
-                                            <label for="address">Address</label>
+                                            <select name="role" class="form-control @error('role') is-invalid @enderror">
+                                                <option selected disabled>-- Pilih Role --</option>
+                                                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin
+                                                </option>
+                                                <option value="jamiah" {{ $user->role == 'jamiah' ? 'selected' : '' }}>
+                                                    Jamiah</option>
+                                                <option value="syubah" {{ $user->role == 'syubah' ? 'selected' : '' }}>
+                                                    Syubah</option>
+                                                <option value="mudir" {{ $user->role == 'mudir' ? 'selected' : '' }}>Mudir
+                                                </option>
+                                            </select>
+                                            @error('role')
+                                                <small class="text-danger">
+                                                    {{ $message }}
+                                                </small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating form-floating-outline">
-                                            <input class="form-control" type="text" id="state" name="state"
-                                                placeholder="California" />
-                                            <label for="state">State</label>
+                                            <input class="form-control @error('password') is-invalid @enderror"
+                                                type="password" id="state" name="password"
+                                                placeholder="Masukan Pasword" />
+                                            <label for="state">Masukan Password</label>
+                                            @error('password')
+                                                <small class="text-danger">
+                                                    {{ $message }}
+                                                </small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating form-floating-outline">
-                                            <input type="text" class="form-control" id="zipCode" name="zipCode"
-                                                placeholder="231465" maxlength="6" />
-                                            <label for="zipCode">Zip Code</label>
+                                            <input type="password" class="form-control" id="zipCode"
+                                                name="password_confirmation" placeholder="Konfirmasi Pasword" />
+                                            <label for="zipCode">Konfirmasi Password</label>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="mt-6">
-                                    <button type="submit" class="btn btn-primary me-3">Save changes</button>
-                                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                    <button type="submit" class="btn btn-primary me-3">Edit User</button>
                                 </div>
                             </form>
                         </div>
                         <!-- /Account -->
                     </div>
-
                 </div>
             </div>
         </div>

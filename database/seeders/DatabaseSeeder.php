@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
             [
                 "id" => 1,
                 "name" => "admin",
-                "email" => "admin@admin.com",
-                "password" => Hash::make("12345678"),
+                "email" => "admin@gmail.com",
+                "password" => Hash::make("123123123"),
                 "role" => "admin",
                 "syubah" => "AsySyuhada"
             ],
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
                 "id" => 2,
                 "name" => "dudung",
                 "email" => "dudung@gmail.com",
-                "password" => Hash::make("12345678"),
+                "password" => Hash::make("123123123"),
                 "role" => "jamiah",
                 "syubah" => "AsySyuhada"
             ],
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
                 "id" => 3,
                 "name" => "ujang",
                 "email" => "ujang@gmail.com",
-                "password" => Hash::make("12345678"),
+                "password" => Hash::make("123123123"),
                 "role" => "syubah",
                 "syubah" => "AsySyuhada"
             ],
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
                 "id" => 4,
                 "name" => "asep",
                 "email" => "asep@gmail.com",
-                "password" => Hash::make("12345678"),
+                "password" => Hash::make("123123123"),
                 "role" => "mudir",
                 "syubah" => "AsySyuhada"
             ]

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -17,8 +18,12 @@ class UserController extends Controller
     // Menampilkan daftar user
     public function index()
     {
-        $users = User::all();
-        return view('user.user', compact('users'));
+        $data = array(
+            "title" => "Data User",
+            "menuAdminUser" => "active",
+            "users"  => User::OrderBy('role','asc')->get(),
+        );
+        return view('user.index', $data);
     }
 
     // Menampilkan profil user yang sedang login
@@ -28,7 +33,15 @@ class UserController extends Controller
         return view('user.profile', compact('user'));
     }
 
-
+    public function create()
+    {
+        $data = array(
+            "title" => "Tambah User",
+            "menuAdminUser" => "active",
+            "user"  => User::get(),
+        );
+        return view ('user.create', $data);
+    }
 
     // Menyimpan user baru ke database
     public function store(Request $request)
@@ -36,9 +49,18 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'role' => 'required|in:admin,jamiah,syubah,mudir',
-            'syubah' => 'required|in:AshShidiqqin,AsySyuhada,AshSholihin,AlMutaqien,AlMuhsinin,AshShobirin',
+            'role' => 'required',
+            'syubah' => 'required',
+            'password' => 'required|min:8',
+        ],[
+                'name.required'         => 'Nama tidak boleh kosong',
+                'email.required'        => 'Email tidak boleh kosong',
+                'email.unique'          => 'Email sudah terdaftar',
+                'role.required'        => 'Role tidak boleh kosong',
+                'syubah.required'        => 'Syubah tidak boleh kosong',
+                'password.required'     => 'Password tidak boleh kosong',
+                'password.confirmed'    => 'Password konfirmasi tidak sama',
+                'password.min'  => 'Password minimal 8 karakter',
         ]);
 
         User::create([
@@ -55,9 +77,13 @@ class UserController extends Controller
     // Menampilkan form edit user
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $data = array(
+            "title" => "Edit User",
+            "menuAdminUser" => "active",
+            "user"  => User::findOrFail($id),
+        );
 
-        return response()->json($user); // Mengembalikan data dalam format JSON
+        return view('user.edit', $data); // Mengembalikan data dalam format JSON
 
     }
 
@@ -69,22 +95,27 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $id,
             'syubah' => 'required|string',
             'role' => 'required|string',
-            'password' => 'nullable|min:6', // Password bisa kosong
-        ]);
-
+            'password' => 'nullable|min:8', // Password bisa kosong
+        ],[
+            'name.required'         => 'Nama tidak boleh kosong',
+            'email.required'        => 'Email tidak boleh kosong',
+            'email.unique'          => 'Email sudah terdaftar',
+            'role.required'        => 'Role tidak boleh kosong',
+            'syubah.required'        => 'Syubah tidak boleh kosong',
+            'password.required'     => 'Password tidak boleh kosong',
+            'password.confirmed'    => 'Password konfirmasi tidak sama',
+            'password.min'  => 'Password minimal 8 karakter',
+    ]);
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->syubah = $request->syubah;
         $user->role = $request->role;
-
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password); // Hash password jika diisi
         }
-
         $user->save();
-
-        return redirect()->back()->with('success', 'User berhasil diperbarui');
+        return redirect()->route('user')->with('success', 'User berhasil diperbarui');
     }
 
     // Menghapus user dari database
@@ -94,5 +125,17 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('user')->with('success', 'User berhasil dihapus.');
+    }
+
+    public function pdf(){
+        $filename = now()->format('d-m-Y_H.i.s');
+        $data = array(
+            'user' => User::OrderBy('role','asc')->get(),
+            'tanggal' => now()->format('d-m-Y'),
+            'jam' => now()->format('H.i.s'),
+        );
+
+        $pdf = Pdf::loadView('user.pdf', $data);
+        return $pdf->setPaper('a4', 'landscape')->stream('DataUser_'.$filename.'.pdf');
     }
 }

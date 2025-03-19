@@ -119,14 +119,14 @@
     <script>
         $(document).ready(function() {
             console.log("SweetAlert2 siap!");
-    
+
             $(document).on('click', '.buttonDeletion', function(e) {
                 e.preventDefault();
                 console.log("Tombol hapus diklik!");
-    
+
                 let form = $(this).closest('form');
                 console.log("Form target:", form);
-    
+
                 Swal.fire({
                     title: 'Konfirmasi Penghapusan',
                     text: 'Apakah Anda yakin ingin menghapus data ini?',
@@ -147,7 +147,7 @@
             });
         });
     </script>
-    
+
 </body>
 
 </html>
