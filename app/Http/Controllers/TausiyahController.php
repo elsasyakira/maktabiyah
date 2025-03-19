@@ -11,13 +11,15 @@ class TausiyahController extends Controller
     public function index()
     {
         $tausiyahs = Tausiyah::with('umat')->get(); // Ambil semua data tausiyah dengan relasi umat
-        return view('tausiyahs.index', compact('tausiyahs'));
+        $menuTausiyah = 'active';
+        return view('tausiyahs.index', compact('tausiyahs','menuTausiyah'));
     }
 
     public function create()
     {
         $umats = Umat::all(); // Ambil semua data umat
-        return view('tausiyahs.create', compact('umats'));
+        $menuTausiyah = 'active';
+        return view('tausiyahs.create', compact('umats','menuTausiyah'));
     }
 
     public function store(Request $request)
@@ -43,7 +45,8 @@ class TausiyahController extends Controller
     {
         $tausiyah = Tausiyah::findOrFail($id); // Pastikan variabel ini ada
         $umats = Umat::all();
-        return view('tausiyahs.edit', compact('tausiyah', 'umats'));
+        $menuTausiyah = 'active';
+        return view('tausiyahs.edit', compact('tausiyah', 'umats','menuTausiyah'));
     }
 
     public function update(Request $request, $id)

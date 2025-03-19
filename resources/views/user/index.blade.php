@@ -121,8 +121,9 @@
                                                     <i class="ri-more-2-line"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{ route('user.edit', $user->id) }}" <i
-                                                        class="ri-pencil-line me-1"></i> Edit
+                                                    <a class="dropdown-item text-warning"
+                                                        href="{{ route('user.edit', $user->id) }}"> <i
+                                                            class="ri-pencil-line me-1"></i> Edit
                                                     </a>
                                                     <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                                                         @csrf
@@ -141,6 +142,9 @@
                         </table>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                {{ $users->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>

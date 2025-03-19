@@ -12,14 +12,16 @@ class AbsensiController extends Controller {
     {
         // Ambil semua absensi dengan relasi umat
         $absensis = Absensi::with('tausiyah')->get();
-        return view('absensis.index', compact('absensis'));
+        $menuAbsensi = 'active';
+        return view('absensis.index', compact('absensis','menuAbsensi'));
     }
 
     public function create()
     {
         // Ambil semua data umat untuk dropdown pilihan
         $tausiyahs = Tausiyah::all();
-        return view('absensis.create', compact('tausiyahs'));
+        $menuAbsensi = 'active';
+        return view('absensis.create', compact('tausiyahs','menuAbsensi'));
     }
 
     public function store(Request $request) 
@@ -54,7 +56,8 @@ class AbsensiController extends Controller {
     {
         $absensi = Absensi::findOrFail($id);
         $tausiyahs = Tausiyah::all();
-        return view('absensis.edit', compact('absensi', 'tausiyahs'));
+        $menuAbsensi = 'active';
+        return view('absensis.edit', compact('absensi', 'tausiyahs','menuAbsensi'));
     }
 
     public function update(Request $request, $id)

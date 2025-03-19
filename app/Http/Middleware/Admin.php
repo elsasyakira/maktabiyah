@@ -19,7 +19,7 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check() && Auth::user()->role !== 'admin') {
-            return abort(403, 'Unauthorized');
+            return Redirect()->route('dashboard')->with('error', 'Anda tidak punya akses');
         }
         return $next($request);
     }

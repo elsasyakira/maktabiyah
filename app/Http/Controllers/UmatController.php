@@ -20,7 +20,8 @@ class UmatController extends Controller
 
     public function create()
     {
-        return view('umats.create');
+        $menuAdminUmat = 'active';
+        return view('umats.create', compact('menuAdminUmat'));
     }
 
     public function store(Request $request)
@@ -47,7 +48,8 @@ class UmatController extends Controller
     public function edit($id)
     {
         $umat = Umat::findOrFail($id);
-        return view('umats.edit', compact('umat'));
+        $menuAdminUmat = 'active';
+        return view('umats.edit', compact('umat','menuAdminUmat'));
     }
 
     public function update(Request $request, $id)

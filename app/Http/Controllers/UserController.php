@@ -21,7 +21,7 @@ class UserController extends Controller
         $data = array(
             "title" => "Data User",
             "menuAdminUser" => "active",
-            "users"  => User::OrderBy('role','asc')->get(),
+            "users"  => User::OrderBy('role','asc')->paginate(10),
         );
         return view('user.index', $data);
     }
@@ -51,7 +51,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'role' => 'required',
             'syubah' => 'required',
-            'password' => 'required|min:8',
+            'password' => 'required|confirmed|min:8',
         ],[
                 'name.required'         => 'Nama tidak boleh kosong',
                 'email.required'        => 'Email tidak boleh kosong',
