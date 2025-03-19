@@ -95,7 +95,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $id,
             'syubah' => 'required|string',
             'role' => 'required|string',
-            'password' => 'nullable|min:8', // Password bisa kosong
+            'password' => 'nullable|confirmed|min:8', // Password bisa kosong
         ],[
             'name.required'         => 'Nama tidak boleh kosong',
             'email.required'        => 'Email tidak boleh kosong',
