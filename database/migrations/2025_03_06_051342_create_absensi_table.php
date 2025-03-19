@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('absensi', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->enum('status', ['hadir', 'izin', 'sakit', 'tanpa_keterangan']);
             $table->string('ket');
             $table->foreignId('umat_id')->constrained('umat')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

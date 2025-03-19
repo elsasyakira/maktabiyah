@@ -20,25 +20,52 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th>Tanggal</th>
+                                    <th>No</th>
                                     <th>Nama</th>
                                     <th>Status</th>
                                     <th>Keterangan</th>
+                                    <th>Pengisi</th>
+                                    <th>Tempat</th>
+                                    <th>Bulan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($absensi as $absensi)
-                                    <tr class="border-transparent">
-                                        <td>{{ $absensi->tanggal }}</td>
-                                        <td>{{ $item->umat->name }}</td>
-                                        <td>{{ $absensi->status }}</td>
+                                @php
+                                    $bulanList = [
+                                        1 => 'Januari',
+                                        2 => 'Februari',
+                                        3 => 'Maret',
+                                        4 => 'April',
+                                        5 => 'Mei',
+                                        6 => 'Juni',
+                                        7 => 'Juli',
+                                        8 => 'Agustus',
+                                        9 => 'September',
+                                        10 => 'Oktober',
+                                        11 => 'November',
+                                        12 => 'Desember',
+                                    ];
+                                @endphp
+
+                                @foreach ($absensis as $absensi)
+                                    <tr>
+                                        <td>{{ $absensi->id }}</td>
+                                        <td>{{ $absensi->tausiyah->name ?? '-' }}</td>
+                                        <!-- Menampilkan nama umat dari relasi -->
+                                        <td>{{ ucfirst($absensi->status) }}</td>
                                         <td>{{ $absensi->ket }}</td>
+                                        <td>{{ $absensi->pengisi }}</td>
+                                        <td>{{ $absensi->tempat }}</td>
+                                        <td>{{ $bulanList[$absensi->bulan] }}</td>
                                         <td>
-                                            <a href="{{ route('absensis.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('absensis.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                            <a href="{{ route('absensis.edit', $absensi->id) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('absensis.destroy', $absensi->id) }}" method="POST"
+                                                style="display:inline;">
                                                 @csrf @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>

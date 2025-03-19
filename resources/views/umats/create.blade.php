@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
-            <h4>Tambah Umat</h4>
+            <label class="fw-bold mb-2">Tambah Umat</label>
             <div class="col-12">
                 <div class="card overflow-hidden p-4">
                     <form action="{{ route('umats.store') }}" method="POST">

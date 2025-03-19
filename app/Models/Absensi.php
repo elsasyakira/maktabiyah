@@ -9,13 +9,10 @@ class Absensi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'tanggal', 'name', 'status', 'ket', 'umat_id', 'user_id'];
+    protected $fillable = ['umat_id', 'status', 'ket', 'pengisi', 'tempat', 'bulan'];
 
-    public function umat() {
-        return $this->belongsTo(Umat::class);
-    }
-
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function tausiyah()
+    {
+        return $this->belongsTo(Tausiyah::class, 'umat_id');
     }
 }

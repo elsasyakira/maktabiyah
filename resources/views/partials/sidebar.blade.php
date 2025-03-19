@@ -62,6 +62,18 @@
                 </a>
             </li>
             <li class="menu-item">
+                <a href="{{ route('tausiyahs.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ri-clipboard-line"></i>
+                    <div data-i18n="User">Data Tausiyah</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('absensis.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ri-clipboard-line"></i>
+                    <div data-i18n="User">Absensi Tausiyah</div>
+                </a>
+            </li>
+            <li class="menu-item">
                 <a href="{{ route('user') }}" class="menu-link">
                     <i class="menu-icon tf-icons ri-user-line"></i>
                     <div data-i18n="User">Users</div>

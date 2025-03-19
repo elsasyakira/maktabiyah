@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UmatController;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\TausiyahController;
+use App\Models\Tausiyah;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +45,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
     Route::get('/', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     Route::resource('absensis', AbsensiController::class);
+    Route::resource('tausiyahs', TausiyahController::class);
 });

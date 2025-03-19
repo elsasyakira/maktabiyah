@@ -17,8 +17,12 @@ class Umat extends Model
         'farah',
     ];
 
-    public function absensi()
+    public function absensis()
     {
-        return $this->hasMany(Absensi::class);
+        return $this->hasMany(Absensi::class, 'umat_id');
+    }
+
+    public function tausiyahs() {
+        return $this->hasMany(Tausiyah::class);
     }
 }

@@ -2,60 +2,66 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
-            <h4>Edit Umat</h4>
+            <label class="fw-bold">Edit Absensis</label>
             <div class="col-12">
                 <div class="card overflow-hidden p-4">
-                    <form action="{{ route('umats.update', $umat->id) }}" method="POST">
+                    <form action="{{ route('absensis.update', $absensi->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <input type="hidden" name="id" value="{{ $umat->id }}">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="name" class="form-label">Nama</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ $umat->name }}" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="nas" class="form-label">Nas</label>
-                                <input type="text" class="form-control" id="nas" name="nas"
-                                    value="{{ $umat->nas }}" required>
-                            </div>
+                
+                        <div class="mb-3">
+                            <label for="umat_id" class="form-label">Nama Umat</label>
+                            <select class="form-control" name="umat_id" id="umat_id" required>
+                                <option value="">Pilih Umat</option>
+                                @foreach ($tausiyahs as $tausiyah)
+                                    <option value="{{ $tausiyah->id }}" {{ $tausiyah->id == $absensi->umat_id ? 'selected' : '' }}>
+                                        {{ $tausiyah->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="syubah" class="form-label">Syubah</label>
-                                <select class="form-control" id="syubah" name="syubah">
-                                    <option value="AshShidiqqin" {{ $umat->syubah == 'AshShidiqqin' ? 'selected' : '' }}>
-                                        AshShidiqqin
+                
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-control" name="status" id="status" required>
+                                @foreach (['hadir', 'izin', 'sakit', 'tanpa_keterangan'] as $status)
+                                    <option value="{{ $status }}" {{ $absensi->status == $status ? 'selected' : '' }}>
+                                        {{ ucfirst(str_replace('_', ' ', $status)) }}
                                     </option>
-                                    <option value="AsySyuhada" {{ $umat->syubah == 'AsySyuhada' ? 'selected' : '' }}>AsySyuhada
-                                    </option>
-                                    <option value="AshSholihin" {{ $umat->syubah == 'AshSholihin' ? 'selected' : '' }}>
-                                        AshSholihin</option>
-                                    <option value="AlMutaqien" {{ $umat->syubah == 'AlMutaqien' ? 'selected' : '' }}>AlMutaqien
-                                    </option>
-                                    <option value="AlMuhsinin" {{ $umat->syubah == 'AlMuhsinin' ? 'selected' : '' }}>AlMuhsinin
-                                    </option>
-                                    <option value="AshShobirin" {{ $umat->syubah == 'AshShobirin' ? 'selected' : '' }}>
-                                        AshShobirin</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="farah" class="form-label">Farah</label>
-                                <input type="number" class="form-control" id="farah" name="farah"
-                                    value="{{ $umat->farah }}" required>
-                            </div>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="holaqoh" class="form-label">Holaqoh</label>
-                                <input type="text" class="form-control" id="holaqoh" name="holaqoh"
-                                    value="{{ $umat->holaqoh }}" required>
-                            </div>
+                
+                        <div class="mb-3">
+                            <label for="ket" class="form-label">Keterangan</label>
+                            <input type="text" class="form-control" name="ket" id="ket" value="{{ $absensi->ket }}" placeholder="Opsional">
                         </div>
-
+                
+                        <div class="mb-3">
+                            <label for="pengisi" class="form-label">Pengisi</label>
+                            <input type="text" class="form-control" name="pengisi" id="pengisi" value="{{ $absensi->pengisi }}" required>
+                        </div>
+                
+                        <div class="mb-3">
+                            <label for="tempat" class="form-label">Tempat</label>
+                            <input type="text" class="form-control" name="tempat" id="tempat" value="{{ $absensi->tempat }}" required>
+                        </div>
+                
+                        <div class="mb-3">
+                            <label for="bulan" class="form-label">Bulan</label>
+                            <select class="form-control" name="bulan" id="bulan" required>
+                                <option value="">Pilih Bulan</option>
+                                @foreach ([
+                                    1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+                                    5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+                                    9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+                                ] as $key => $bulan)
+                                    <option value="{{ $key }}" {{ $absensi->bulan == $key ? 'selected' : '' }}>{{ $bulan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{ route('umats.index') }}" class="btn btn-secondary">Batal</a>
                     </form>
                 </div>
             </div>
