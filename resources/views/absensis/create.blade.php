@@ -2,8 +2,10 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
-            <label class="fw-bold mb-2">Tambah Absensi Tausiyah</label>
             <div class="col-12">
+                <div class="card bg-primary py-0">
+                    <h5 class="card-header text-white"><strong>Data User</strong></h5>
+                </div>
                 <div class="card overflow-hidden p-4">
                     <form action="{{ route('absensis.store') }}" method="POST">
                         @csrf
@@ -77,6 +79,7 @@
 
                         <div class="text">
                             <button type="submit" class="btn btn-primary">Simpan</button>
+                            <a href="{{ route('absensis.index') }}" class="btn btn-secondary">Batal</a>
                         </div>
                     </form>
                 </div>

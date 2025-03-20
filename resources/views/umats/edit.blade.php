@@ -2,8 +2,10 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
-            <label class="fw-bold">Edit Umat</label>
             <div class="col-12">
+                <div class="card bg-primary py-0">
+                    <h5 class="card-header text-white"><strong>Edit Data Umat</strong></h5>
+                </div>
                 <div class="card overflow-hidden p-4">
                     <form action="{{ route('umats.update', $umat->id) }}" method="POST">
                         @csrf

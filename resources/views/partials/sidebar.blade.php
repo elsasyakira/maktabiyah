@@ -67,6 +67,18 @@
                     <div data-i18n="User">Data Umat</div>
                 </a>
             </li>
+            <li class="menu-item {{ $menuTausiyah ?? '' }}">
+                <a href="{{ route('tausiyahs.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ri-clipboard-line"></i>
+                    <div data-i18n="User">Data Tausiyah</div>
+                </a>
+            </li>
+            <li class="menu-item {{ $menuAbsensi ?? '' }}">
+                <a href="{{ route('absensis.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ri-clipboard-line"></i>
+                    <div data-i18n="User">Absensi Tausiyah</div>
+                </a>
+            </li>
         @endif
         @if (Auth::user()->role == 'mudir')
             <li class="menu-item {{ $menuTausiyah ?? '' }}">
@@ -86,7 +98,7 @@
             <li class="menu-item">
                 <a href="#" class="menu-link">
                     <i class="menu-icon tf-icons ri-user-line"></i>
-                    <div data-i18n="User">Laporan Abensi</div>
+                    <div data-i18n="User">Laporan Absensi</div>
                 </a>
             </li>
             <!-- Absensi -->

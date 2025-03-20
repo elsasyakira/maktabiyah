@@ -10,8 +10,9 @@
                         <h5 class="card-header text-white"><strong>Data Umat</strong></h5>
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('umats.create') }}" class="btn btn-primary col-md-2"><i
-                                class="ri-user-add-line me-1"></i>Tambah Data</a>
+                        <a href="{{ route('umats.create') }}" class="btn btn-primary btn-sm me-2">
+                            <i class="ri-user-add-line me-1"></i>Tambah Data
+                            </a>
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}

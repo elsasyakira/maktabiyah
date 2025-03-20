@@ -2,11 +2,13 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row gy-3">
-            <label class="fw-bold">List Data Tausiyah</label>
 
             <!-- Data Tables -->
             <div class="col-12">
                 <div class="card overflow-hidden">
+                    <div class="card bg-primary py-0">
+                        <h5 class="card-header text-white"><strong>Data Tausiyah</strong></h5>
+                    </div>
                     <div class="card-body">
                         <a href="{{ route('tausiyahs.create') }}" class="btn btn-primary col-md-2"><i
                                 class="ri-user-add-line me-1"></i>Tambah Data</a>
