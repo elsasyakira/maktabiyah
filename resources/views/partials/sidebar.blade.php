@@ -70,7 +70,7 @@
             <li class="menu-item {{ $menuTausiyah ?? '' }}">
                 <a href="{{ route('tausiyahs.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons ri-clipboard-line"></i>
-                    <div data-i18n="User">Data Tausiyah</div>
+                    <div data-i18n="User">Anggota Halaqoh</div>
                 </a>
             </li>
             <li class="menu-item {{ $menuAbsensi ?? '' }}">

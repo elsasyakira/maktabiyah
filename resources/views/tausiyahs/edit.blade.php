@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card bg-primary py-0">
-                    <h5 class="card-header text-white"><strong>Edit Data Tausiyah</strong></h5>
+                    <h5 class="card-header text-white"><strong>Edit Data Anggota Halaqoh</strong></h5>
                 </div>
                 <div class="card overflow-hidden p-4">
                     <form action="{{ route('tausiyahs.update', $tausiyah->id) }}" method="POST">

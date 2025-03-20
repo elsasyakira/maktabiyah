@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card bg-primary py-0">
-                    <h5 class="card-header text-white"><strong>Data Tausiyah</strong></h5>
+                    <h5 class="card-header text-white"><strong>Tambah Data Anggota Halaqoh</strong></h5>
                 </div>
                 <div class="card overflow-hidden p-4">
                     <form action="{{ route('tausiyahs.store') }}" method="POST">

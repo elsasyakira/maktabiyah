@@ -7,7 +7,7 @@
             <div class="col-12">
                 <div class="card overflow-hidden">
                     <div class="card bg-primary py-0">
-                        <h5 class="card-header text-white"><strong>Data Tausiyah</strong></h5>
+                        <h5 class="card-header text-white"><strong>Data Anggota Halaqoh</strong></h5>
                     </div>
                     <div class="card-body">
                         <a href="{{ route('tausiyahs.create') }}" class="btn btn-primary col-md-2"><i
