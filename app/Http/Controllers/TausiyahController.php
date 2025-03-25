@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Umat;
 use App\Models\Tausiyah;
+use Illuminate\Support\Facades\DB;
 
 class TausiyahController extends Controller
 {
@@ -17,9 +18,17 @@ class TausiyahController extends Controller
 
     public function create()
     {
-        $umats = Umat::all(); // Ambil semua data umat
-        $menuTausiyah = 'active';
-        return view('tausiyahs.create', compact('umats','menuTausiyah'));
+        $user = auth()->user(); // Ambil user yang login
+
+        if ($user->role === 'admin') {
+            // Admin bisa melihat semua umat
+            $umatList = Umat::all();
+        } else {
+            // Mudir hanya bisa melihat umat dengan syubah yang sama
+            $umatList = Umat::where('syubah', $user->syubah)->get();
+        }
+
+        return view('tausiyahs.create', compact('umatList'));
     }
 
     public function store(Request $request)
@@ -27,18 +36,14 @@ class TausiyahController extends Controller
         $request->validate([
             'umat_id' => 'required|exists:umats,id',
         ]);
-
-        // Ambil data umat berdasarkan umat_id
-        $umat = Umat::find($request->umat_id);
-
-        // Simpan ke database
-        Tausiyah::create([
-            'umat_id' => $umat->id,
-            'name' => $umat->name, // Simpan nama dari tabel umats
-            'holaqoh' => $umat->holaqoh, // Simpan halaqoh dari tabel umats
+    
+        DB::table('tausiyahs')->insert([
+            'umat_id' => $request->umat_id,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
-
-        return redirect()->route('tausiyahs.index')->with('success', 'Tausiyah berhasil ditambahkan');
+    
+        return redirect()->route('tausiyahs.create')->with('success', 'Anggota halaqoh berhasil ditambahkan');
     }
 
     public function edit($id)

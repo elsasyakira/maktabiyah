@@ -46,4 +46,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('absensis', AbsensiController::class);
     Route::resource('tausiyahs', TausiyahController::class);
+    Route::get('/halaqoh/create', [TausiyahController::class, 'create'])->middleware('auth');
+    Route::post('/halaqoh/store', [TausiyahController::class, 'store'])->middleware('auth');
 });

@@ -14,8 +14,8 @@
                                 <label for="umat_id">Pilih Umat</label>
                                 <select id="umat_id" name="umat_id" class="form-control">
                                     <option value="">-- Pilih Umat --</option>
-                                    @foreach ($umats as $umat)
-                                        <option value="{{ $umat->id }}" data-halaqoh="{{ $umat->holaqoh }}">{{ $umat->name }}</option>
+                                    @foreach ($umatList as $umat)
+                                    <option value="{{ $umat->id }}">{{ $umat->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
