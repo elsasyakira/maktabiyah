@@ -22,7 +22,6 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Nama</th>
                                     <th>Halaqoh</th>
                                     <th>Aksi</th>
@@ -32,7 +31,6 @@
                                 @if (isset($tausiyahs) && $tausiyahs->count() > 0)
                                     @foreach ($tausiyahs as $index => $tausiyah)
                                         <tr>
-                                            <td>{{ $tausiyah->id }}</td>
                                             <td>{{ $tausiyah->umat->name }}</td>
                                             <td>{{ $tausiyah->holaqoh ?? '-' }}</td> <!-- Pastikan menampilkan halaqoh -->
                                             <td>

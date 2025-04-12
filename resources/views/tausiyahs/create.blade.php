@@ -15,7 +15,8 @@
                                 <select id="umat_id" name="umat_id" class="form-control">
                                     <option value="">-- Pilih Umat --</option>
                                     @foreach ($umatList as $umat)
-                                    <option value="{{ $umat->id }}">{{ $umat->name }}</option>
+                                        <option value="{{ $umat->id }}" data-halaqoh="{{ $umat->holaqoh }}">
+                                            {{ $umat->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -36,14 +36,18 @@ class TausiyahController extends Controller
         $request->validate([
             'umat_id' => 'required|exists:umats,id',
         ]);
+
+        $umat = Umat::find($request->umat_id);
     
         DB::table('tausiyahs')->insert([
             'umat_id' => $request->umat_id,
+            'name' => $umat->name,
+            'holaqoh' => $umat->holaqoh, // pastikan kolom di tabel umat adalah halaqoh (atau holaqoh sesuai strukturmu)
             'created_at' => now(),
             'updated_at' => now(),
         ]);
     
-        return redirect()->route('tausiyahs.create')->with('success', 'Anggota halaqoh berhasil ditambahkan');
+        return redirect()->route('tausiyahs.index')->with('success', 'Anggota halaqoh berhasil ditambahkan');
     }
 
     public function edit($id)

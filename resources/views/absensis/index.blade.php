@@ -21,7 +21,6 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Nama</th>
                                     <th>Status</th>
                                     <th>Keterangan</th>
@@ -51,7 +50,6 @@
 
                                 @foreach ($absensis as $absensi)
                                     <tr>
-                                        <td>{{ $absensi->id }}</td>
                                         <td>{{ $absensi->tausiyah->name ?? '-' }}</td>
                                         <!-- Menampilkan nama umat dari relasi -->
                                         <td>{{ ucfirst($absensi->status) }}</td>
