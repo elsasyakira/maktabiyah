@@ -16,4 +16,9 @@ class Tausiyah extends Model
     {
         return $this->belongsTo(Umat::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

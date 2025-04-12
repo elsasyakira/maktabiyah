@@ -11,22 +11,26 @@ class TausiyahController extends Controller
 {
     public function index()
     {
-        $tausiyahs = Tausiyah::with('umat')->get(); // Ambil semua data tausiyah dengan relasi umat
-        $menuTausiyah = 'active';
-        return view('tausiyahs.index', compact('tausiyahs','menuTausiyah'));
+        $user = auth()->user();
+
+        if ($user->role === 'admin') {
+            // Admin bisa melihat semua data tausiyah
+            $tausiyahs = \App\Models\Tausiyah::with('umat')->get();
+        } else {
+            // Mudir hanya bisa melihat data yang ia input sendiri
+            $tausiyahs = \App\Models\Tausiyah::with('umat')
+                            ->where('user_id', $user->id)
+                            ->get();
+        }
+
+        return view('tausiyahs.index', compact('tausiyahs'));
     }
+
 
     public function create()
     {
-        $user = auth()->user(); // Ambil user yang login
-
-        if ($user->role === 'admin') {
-            // Admin bisa melihat semua umat
-            $umatList = Umat::all();
-        } else {
-            // Mudir hanya bisa melihat umat dengan syubah yang sama
-            $umatList = Umat::where('syubah', $user->syubah)->get();
-        }
+        $user = auth()->user();
+        $umatList = Umat::where('syubah', $user->syubah)->get();
 
         return view('tausiyahs.create', compact('umatList'));
     }
@@ -36,18 +40,23 @@ class TausiyahController extends Controller
         $request->validate([
             'umat_id' => 'required|exists:umats,id',
         ]);
-
-        $umat = Umat::find($request->umat_id);
+    
+        $mudir = auth()->user();
+    
+        $umat = Umat::where('id', $request->umat_id)
+                    ->where('syubah', $mudir->syubah)
+                    ->firstOrFail();
     
         DB::table('tausiyahs')->insert([
-            'umat_id' => $request->umat_id,
+            'umat_id' => $umat->id,
             'name' => $umat->name,
-            'holaqoh' => $umat->holaqoh, // pastikan kolom di tabel umat adalah halaqoh (atau holaqoh sesuai strukturmu)
+            'holaqoh' => $umat->holaqoh ?? 'Tanpa Halaqoh',
+            'user_id' => $mudir->id, // ✅ ini dia yang harus ditambahkan!
             'created_at' => now(),
             'updated_at' => now(),
-        ]);
+        ]);    
     
-        return redirect()->route('tausiyahs.index')->with('success', 'Anggota halaqoh berhasil ditambahkan');
+        return redirect()->route('tausiyahs.index')->with('success', 'Tausiyah berhasil ditambahkan');
     }
 
     public function edit($id)

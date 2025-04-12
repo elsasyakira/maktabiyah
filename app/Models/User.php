@@ -53,4 +53,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Absensi::class);
     }
+    public function umats()
+    {
+        return $this->hasMany(Umat::class);
+    }
 }

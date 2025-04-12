@@ -22,7 +22,13 @@ class Umat extends Model
         return $this->hasMany(Absensi::class, 'umat_id');
     }
 
-    public function tausiyahs() {
+    public function tausiyahs() 
+    {
         return $this->hasMany(Tausiyah::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
