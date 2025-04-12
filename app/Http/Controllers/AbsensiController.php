@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class AbsensiController extends Controller {
     public function index() 
     {
-        // Ambil semua absensi dengan relasi umat
         $absensis = Absensi::with('tausiyah')->get();
         $menuAbsensi = 'active';
         return view('absensis.index', compact('absensis','menuAbsensi'));
@@ -18,8 +17,13 @@ class AbsensiController extends Controller {
 
     public function create()
     {
-        // Ambil semua data umat untuk dropdown pilihan
-        $tausiyahs = Tausiyah::all();
+        $user = auth()->user();
+        
+        if ($user->role === 'admin') {
+            $tausiyahs = Tausiyah::all();
+        } else {
+            $tausiyahs = Tausiyah::where('user_id', $user->id)->get();
+        }
         $menuAbsensi = 'active';
         return view('absensis.create', compact('tausiyahs','menuAbsensi'));
     }
