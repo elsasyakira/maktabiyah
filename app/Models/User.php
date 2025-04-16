@@ -49,9 +49,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Laporan::class);
     }
-    public function absensi()
+    public function tausiyahs()
     {
-        return $this->hasMany(Absensi::class);
+        return $this->hasMany(Tausiyah::class, 'user_id');
+    }
+
+    public function absensis()
+    {
+        return $this->hasMany(Absensi::class, 'user_id');
     }
     public function umats()
     {

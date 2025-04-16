@@ -10,7 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class AbsensiController extends Controller {
     public function index() 
     {
-        $absensis = Absensi::with('tausiyah')->get();
+        $user = auth()->user();
+
+        if ($user->role === 'mudir') {
+            $absensis = Absensi::with(['tausiyah.umat'])
+                ->where('user_id', $user->id)
+                ->get();
+        } else {
+            $absensis = Absensi::with(['tausiyah.umat'])->get();
+        }
+
         $menuAbsensi = 'active';
         return view('absensis.index', compact('absensis','menuAbsensi'));
     }
@@ -18,14 +27,16 @@ class AbsensiController extends Controller {
     public function create()
     {
         $user = auth()->user();
-        
-        if ($user->role === 'admin') {
-            $tausiyahs = Tausiyah::all();
-        } else {
-            $tausiyahs = Tausiyah::where('user_id', $user->id)->get();
+
+        if ($user->role !== 'mudir') {
+            abort(403);
         }
-        $menuAbsensi = 'active';
-        return view('absensis.create', compact('tausiyahs','menuAbsensi'));
+
+        $tausiyahs = Tausiyah::with('umat')
+            ->where('user_id', $user->id)
+            ->get();
+
+        return view('absensis.create', compact('tausiyahs'));
     }
 
     public function store(Request $request) 
@@ -39,8 +50,15 @@ class AbsensiController extends Controller {
             'bulan' => 'required|integer|between:1,12',
         ]);
 
-        // Ambil data umat dari tabel Tausiyah
-        $tausiyah = Tausiyah::find($request->umat_id);
+        $user = auth()->user();
+
+        $isOwned = Tausiyah::where('user_id', $user->id)
+        ->where('id', $request->umat_id)
+        ->exists();
+
+        if (! $isOwned) {
+            abort(403, 'Umat ini tidak terdaftar di data Anda.');
+        }
 
         Absensi::create([
             'umat_id' => $request->umat_id,
@@ -49,8 +67,7 @@ class AbsensiController extends Controller {
             'pengisi' => $request->pengisi,
             'tempat' => $request->tempat,
             'bulan' => $request->bulan,
-            'name' => $tausiyah ? $tausiyah->name : 'Tidak Diketahui', // Simpan nama umat dari Tausiyah
-            'user_id' => auth()->id(), // Ambil ID user yang sedang login
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('absensis.index')->with('success', 'Absensi berhasil ditambahkan');

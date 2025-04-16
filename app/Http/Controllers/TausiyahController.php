@@ -51,7 +51,7 @@ class TausiyahController extends Controller
             'umat_id' => $umat->id,
             'name' => $umat->name,
             'holaqoh' => $umat->holaqoh ?? 'Tanpa Halaqoh',
-            'user_id' => $mudir->id, // ✅ ini dia yang harus ditambahkan!
+            'user_id' => $mudir->id,
             'created_at' => now(),
             'updated_at' => now(),
         ]);    
@@ -61,7 +61,7 @@ class TausiyahController extends Controller
 
     public function edit($id)
     {
-        $tausiyah = Tausiyah::findOrFail($id); // Pastikan variabel ini ada
+        $tausiyah = Tausiyah::findOrFail($id);
         $umats = Umat::all();
         $menuTausiyah = 'active';
         return view('tausiyahs.edit', compact('tausiyah', 'umats','menuTausiyah'));

@@ -50,13 +50,12 @@
 
                                 @foreach ($absensis as $absensi)
                                     <tr>
-                                        <td>{{ $absensi->tausiyah->name ?? '-' }}</td>
-                                        <!-- Menampilkan nama umat dari relasi -->
-                                        <td>{{ ucfirst($absensi->status) }}</td>
+                                        <td>{{ $absensi->tausiyah->umat->name ?? '-' }}</td>
+                                        <td>{{ $absensi->status }}</td>
                                         <td>{{ $absensi->ket }}</td>
                                         <td>{{ $absensi->pengisi }}</td>
                                         <td>{{ $absensi->tempat }}</td>
-                                        <td>{{ $bulanList[$absensi->bulan] }}</td>
+                                        <td>{{ $absensi->bulan }}</td>
                                         <td>
                                             <a href="{{ route('absensis.edit', $absensi->id) }}"
                                                 class="btn btn-warning btn-sm">Edit</a>
