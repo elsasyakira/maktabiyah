@@ -21,6 +21,9 @@
                                 <label for="nas" class="form-label">Nas</label>
                                 <input type="text" class="form-control" id="nas" name="nas"
                                     value="{{ $umat->nas }}" required>
+                                @error('nas')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
@@ -30,13 +33,16 @@
                                     <option value="AshShidiqqin" {{ $umat->syubah == 'AshShidiqqin' ? 'selected' : '' }}>
                                         AshShidiqqin
                                     </option>
-                                    <option value="AsySyuhada" {{ $umat->syubah == 'AsySyuhada' ? 'selected' : '' }}>AsySyuhada
+                                    <option value="AsySyuhada" {{ $umat->syubah == 'AsySyuhada' ? 'selected' : '' }}>
+                                        AsySyuhada
                                     </option>
                                     <option value="AshSholihin" {{ $umat->syubah == 'AshSholihin' ? 'selected' : '' }}>
                                         AshSholihin</option>
-                                    <option value="AlMutaqien" {{ $umat->syubah == 'AlMutaqien' ? 'selected' : '' }}>AlMutaqien
+                                    <option value="AlMutaqien" {{ $umat->syubah == 'AlMutaqien' ? 'selected' : '' }}>
+                                        AlMutaqien
                                     </option>
-                                    <option value="AlMuhsinin" {{ $umat->syubah == 'AlMuhsinin' ? 'selected' : '' }}>AlMuhsinin
+                                    <option value="AlMuhsinin" {{ $umat->syubah == 'AlMuhsinin' ? 'selected' : '' }}>
+                                        AlMuhsinin
                                     </option>
                                     <option value="AshShobirin" {{ $umat->syubah == 'AshShobirin' ? 'selected' : '' }}>
                                         AshShobirin</option>

@@ -7,10 +7,17 @@ use App\Models\Umat;
 
 class UmatController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = Umat::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
         $data = [
             "umats" => Umat::all(),
+            "totalUmat" => Umat::count(),
             "title" => "Data Umat",
             "menuAdminUmat" => "active",
         ];
@@ -28,10 +35,12 @@ class UmatController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'nas' => 'required|string|max:10',
+            'nas' => 'required|string|max:10|unique:umats,nas',
             'syubah' => 'required|string',
             'farah' => 'required|integer',
-            'holaqoh' => 'required|string|max:10',
+            'holaqoh' => 'required|string|max:50',
+        ], [
+            'nas.unique' => 'NAS sudah terdaftar, silakan gunakan yang lain.',
         ]);
 
         Umat::create([
@@ -56,10 +65,12 @@ class UmatController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'nas' => 'required|string|max:10',
+            'nas' => 'required|string|max:10|unique:umats,nas,' . $id,
             'syubah' => 'required|string',
             'farah' => 'required|integer',
             'holaqoh' => 'required|string|max:10',
+        ], [
+            'nas.unique' => 'NAS sudah terdaftar, silakan gunakan yang lain.',
         ]);
 
         $umat = Umat::findOrFail($id);
