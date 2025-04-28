@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('nas_column_in_umats', function (Blueprint $table) {
+        Schema::table('umats', function (Blueprint $table) {
             $table->unique('nas');
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('nas_column_in_umats', function (Blueprint $table) {
+        Schema::table('umats', function (Blueprint $table) {
             $table->dropUnique(['nas']);
         });
     }
